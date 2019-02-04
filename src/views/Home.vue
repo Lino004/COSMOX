@@ -1,21 +1,23 @@
 <template>
-  <div>
+  <div id="home">
     <Canvas></Canvas>
-    <Music></Music>
+    <TopBar></TopBar>
+    <BottomBar></BottomBar>
   </div>
 </template>
 
 <script>
 import Canvas from '@/components/home/Canvas.vue'
-import Music from '@/components/home/Music.vue'
+import TopBar from '@/components/home/TopBar.vue'
+import BottomBar from '@/components/home/BottomBar.vue'
 
 export default {
   name: 'home',
   components: {
-    Canvas, Music
+    Canvas, TopBar, BottomBar
   }
 }
 </script>
 
-<style>
+<style scoped>
 </style>

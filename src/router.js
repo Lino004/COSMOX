@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Loading from './views/Loading.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
+import Test from './views/Test.vue'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
     }
   ]
 })

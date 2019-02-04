@@ -21,14 +21,10 @@
 </template>
 
 <script>
-import Music from '@/components/home/Music.vue'
 
 export default {
   data () {
     return {}
-  },
-  components: {
-    Music
   },
   methods: {
     go() {

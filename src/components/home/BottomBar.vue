@@ -1,34 +1,32 @@
 <template>
   <div class="center">
-  <div class="right">
-    <div class="search"><i class="material-icons">search</i>
-      <input placeholder="Find music..."/>
-    </div>
-    <div class="menu"><i class="material-icons">menu</i></div>
+        <div class="right">
 
-    <div class="bouton"></div>
-    <div class="current-play">
-      <div class="controls">
-        <div class="prev"><i class="material-icons">skip_previous</i></div>
-        <div class="play"><i class="material-icons">play_arrow</i></div>
-        <div class="next"><i class="material-icons">skip_next</i></div>
-      </div>
+            <div class="bouton"></div>
+            <div class="current-play">
+                <div class="controls">
+                    <div class="prev"><i class="material-icons">skip_previous</i></div>
+                    <div class="play"><i class="material-icons">play_arrow</i></div>
+                    <div class="next"><i class="material-icons">skip_next</i></div>
+                </div>
 
-      <div class="slidecontainer" >
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-      </div>
-      <div class="volume"><i class="material-icons">volume_up</i></div>
-      <div class="repeat"><i class="material-icons">repeat</i></div>
-      <div class="shuffle"><i class="material-icons">shuffle</i></div>
-      <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
+                <div class="slidecontainer" >
+                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                </div>
+
+                <div class="volume"><i class="material-icons">volume_up</i></div>
+                <div class="repeat"><i class="material-icons">repeat</i></div>
+                <div class="shuffle"><i class="material-icons">shuffle</i></div>
+                <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
+            </div>
+            
+        </div>
     </div>
-  </div>
-</div>
 </template>
 
 <script>
 export default {
-  name: 'music',
+  name: 'bottombar',
   data () {
     return {}
   }
@@ -36,85 +34,27 @@ export default {
 </script>
 
 <style scoped>
-*{
-  box-sizing: border-box;
-}
-.center {
-  position: absolute;
-  display: flex;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 .right {
   position: relative;
   flex: 1 1 auto;
   padding-left: 30px;
   background-color: transparent;
 }
-.right .search {
-  position: relative;
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-  color: grey
+.bouton{
+    position: absolute;
+    top: 565px;
+    left:620px;
+    width: 60px;
+    height: 5.5px;
+    -ms-border-radius: 4.5px;
+    -o-border-radius: 4.5px;
+    -moz-border-radius: 4.5px;
+    -webkit-border-radius: 4.5px;
+    border-radius: 4.5px;
+    background: rgb(151,150,153);
+    z-index: 3;
+    cursor: pointer;
 }
-.right .search input {
-  width: 210px;
-  border:none;
-  outline: none;
-  background: none;
-  color: white
-}
-.right .menu {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  color: grey;
-}
-
-.right h1 {
-  display: inline;
-  font-size: 25px;
-}
-
-.right .daily-mix {
-  width: 55%;
-  margin-left: 22.5%;
-}
-.right .daily-mix h1 {
-  display: block;
-  margin-bottom: 20px;
-}
-.right .daily-mix .song {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5px;
-  margin-left: -5px;
-  padding: 5px;
-  cursor: pointer;
-  border-bottom: 1px solid lightgrey;
-
-}
-.right .daily-mix .song > * {
-  width: 20%;
-}
-.right .daily-mix .song img {
-  width: 25px;
-  height: 25px;
-  border-radius: 4px;
-}
-.right .daily-mix .song .duration {
-  width: 28px;
-}
-
 .right .current-play {
   position: fixed;
   display: flex;
@@ -206,21 +146,6 @@ export default {
 }
 .material-icons:hover,
 .material-icons:focus{ color: lightgrey; transition:color 0.2s ease;}
-.bouton{
-    position: absolute;
-    top: 565px;
-    left:620px;
-    width: 60px;
-    height: 5.5px;
-    -ms-border-radius: 4.5px;
-    -o-border-radius: 4.5px;
-    -moz-border-radius: 4.5px;
-    -webkit-border-radius: 4.5px;
-    border-radius: 4.5px;
-    background: rgb(151,150,153);
-    z-index: 3;
-    cursor: pointer;
-}
 
 .slidecontainer {
   width:40%;margin-left:-290px;height:4px
