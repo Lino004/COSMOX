@@ -1,8 +1,8 @@
 <template>
   <div id="home">
-    <Canvas></Canvas>
+    <Canvas @show="showBottomBar = !showBottomBar"></Canvas>
     <TopBar></TopBar>
-    <BottomBar></BottomBar>
+    <BottomBar :show="showBottomBar"></BottomBar>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   name: 'home',
   components: {
     Canvas, TopBar, BottomBar
+  },
+  data () {
+    return {
+      showBottomBar: false
+    }
   }
 }
 </script>

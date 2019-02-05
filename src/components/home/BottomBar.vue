@@ -1,27 +1,23 @@
 <template>
-  <div class="center">
-        <div class="right">
-
-            <div class="bouton"></div>
-            <div class="current-play">
-                <div class="controls">
-                    <div class="prev"><i class="material-icons">skip_previous</i></div>
-                    <div class="play"><i class="material-icons">play_arrow</i></div>
-                    <div class="next"><i class="material-icons">skip_next</i></div>
-                </div>
-
-                <div class="slidecontainer" >
-                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                </div>
-
-                <div class="volume"><i class="material-icons">volume_up</i></div>
-                <div class="repeat"><i class="material-icons">repeat</i></div>
-                <div class="shuffle"><i class="material-icons">shuffle</i></div>
-                <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
-            </div>
-            
+  <div class="right">
+    <transition name="custom-classes-transition" enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+      <div class="current-play" v-if="show">
+        <div class="controls">
+            <div class="prev"><i class="material-icons">skip_previous</i></div>
+            <div class="play"><i class="material-icons">play_arrow</i></div>
+            <div class="next"><i class="material-icons">skip_next</i></div>
         </div>
-    </div>
+        <div class="slidecontainer" >
+          <div class="bouton"></div>
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+        <div class="volume"><i class="material-icons">volume_up</i></div>
+        <div class="repeat"><i class="material-icons">repeat</i></div>
+        <div class="shuffle"><i class="material-icons">shuffle</i></div>
+        <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -29,7 +25,8 @@ export default {
   name: 'bottombar',
   data () {
     return {}
-  }
+  },
+  props: ['show']
 }
 </script>
 
@@ -42,8 +39,8 @@ export default {
 }
 .bouton{
     position: absolute;
-    top: 565px;
-    left:620px;
+    top: 10%;
+    left: 47.5%;
     width: 60px;
     height: 5.5px;
     -ms-border-radius: 4.5px;
@@ -70,6 +67,7 @@ export default {
 }
 .right .current-play .info {
   display: flex;
+  margin-right: 30px;
 }
 .right .current-play img {
   width: 50px;
@@ -132,7 +130,7 @@ export default {
 .right .current-play  .shuffle,.right .current-play .volume{
   color: rgba(242,239,247,.5);
   margin-left: -250px;
-  margin-right: -250px;
+  margin-right: -200px;
   margin-top: 10px;
 }
 .right .current-play .volume {
@@ -141,14 +139,13 @@ export default {
   width: 150px;
 }
 .material-icons{
-   cursor: pointer;
    z-index: 3;
 }
 .material-icons:hover,
 .material-icons:focus{ color: lightgrey; transition:color 0.2s ease;}
 
 .slidecontainer {
-  width:40%;margin-left:-290px;height:4px
+  width:50%;margin-left:-290px;
 }
 
 .slider {
@@ -174,7 +171,6 @@ export default {
   height: 10px;
   border-radius: 50%;
   background: rgb(151,150,153);
-  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
@@ -182,6 +178,5 @@ export default {
   height: 10px;
   border-radius: 50%;
   background: rgb(151,150,153);
-  cursor: pointer;
 }
 </style>

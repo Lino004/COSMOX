@@ -5,7 +5,7 @@
     </div>
     <div id="earth"></div>
 
-    <div id="title">
+    <div id="title" >
       <h2 data-text="COSMOX">COSMOX</h2>
     </div>
 
@@ -184,6 +184,9 @@ h2:before {
   font-size: 25px;
   text-align: center;
   letter-spacing: 6px;
+}
+#title{
+  margin-top:100px;
 }
 #subtitle span {
   color: #d8d8d8;

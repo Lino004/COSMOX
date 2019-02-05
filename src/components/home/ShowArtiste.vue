@@ -1,20 +1,17 @@
 <template>
-  <div id="test">
-    <canvas id="my_canva" :width="w" :height="h"></canvas>
+  <div id="showArtiste">
+      <h4>Nom Artiste</h4>
+      <canvas id="my_canva" :width="w" :height="h"></canvas>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'test',
+  name: 'showArtiste',
   data () {
     return {
-      w: 200
-    }
-  },
-  computed: {
-    h () {
-      return this.w / 3
+      w: 120,
+      h: 30
     }
   },
   methods: {
@@ -26,21 +23,21 @@ export default {
         ctx.fillStyle = 'rgba(144, 151, 159, 0.67)'
         ctx.beginPath()
         ctx.moveTo(this.w * 1 / 10, this.h * 7 / 10)
-        ctx.lineTo(this.w * 95 / 300, 10)
-        ctx.lineTo(this.w, 10)
-        ctx.lineTo(this.w, 0)
-        ctx.lineTo(this.w * 3 / 10, 0)
+        ctx.lineTo(this.w * 95 / 300, this.h * 3 / 10)
+        ctx.lineTo(this.w, this.h * 3 / 10)
+        ctx.lineTo(this.w, this.h * 2 / 10)
+        ctx.lineTo(this.w * 3 / 10, this.h * 2 / 10)
         ctx.lineTo(this.w * 1 / 30, this.h * 7 / 10)
         ctx.fill()
 
         ctx.fillStyle = 'rgba(144, 151, 159, 0.67)'
         ctx.beginPath()
-        ctx.arc(this.w / 10, this.h * 7 / 10, 20, 0, Math.PI * 2, true)
+        ctx.arc(this.w / 10, this.h * 7 / 10, 8, 0, Math.PI * 2, true)
         ctx.fill()
 
         ctx.fillStyle = 'rgba(144, 151, 159, 1)'
         ctx.beginPath()
-        ctx.arc(this.w / 10, this.h * 7 / 10, 15, 0, Math.PI * 2, true)
+        ctx.arc(this.w / 10, this.h * 7 / 10, 5, 0, Math.PI * 2, true)
         ctx.fill()
       } else {
         alert("Canvas n'est pas pris en charge")
@@ -54,7 +51,21 @@ export default {
 </script>
 
 <style scoped>
+#showArtiste {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: aliceblue
+}
 canvas{
-  border: 1px solid black;
+    margin: 0;
+    padding-top: 10%;
+}
+h4{
+    position: absolute;
+    left: 30%;
+    margin: 0;
+    padding: 0;
+    text-align: right;
 }
 </style>

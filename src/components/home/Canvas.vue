@@ -1,12 +1,18 @@
 <template>
   <div>
-    <canvas @click="test(i)" v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
+    <canvas @click="test($event, i)" v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
+    <ShowArtiste></ShowArtiste>
   </div>
 </template>
 
 <script>
+import ShowArtiste from '@/components/home/ShowArtiste.vue'
+
 export default {
   name: 'canvas',
+  components: {
+    ShowArtiste
+  },
   data () {
     return {
       maxStar: 800,
@@ -31,7 +37,7 @@ export default {
       let canvas = document.getElementById('my_canvas' + i)
       let context = canvas.getContext('2d')
 
-      let wC = (canvas.width = canvas.height = this.random(10, 30))
+      let wC = canvas.width = canvas.height = this.random(10, 30)
       let half = canvas.width / 2
       let gradient = context.createRadialGradient(
         half,
@@ -78,7 +84,9 @@ export default {
       return diameter / 2
     },
     test (i) {
-      alert(i)
+      let mycanva = document.getElementById('my_canvas' + i)
+      console.log(mycanva.style.left + ' et ' + mycanva.style.top)
+      this.$emit('show')
     },
     posEtoile (i) {
       var w = window.innerWidth
