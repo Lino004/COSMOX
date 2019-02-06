@@ -46,8 +46,8 @@ export default {
     },
     position () {
       let showArtiste = document.getElementById('showArtiste')
-      showArtiste.style.left = this.pX
-      showArtiste.style.top = this.pY
+      showArtiste.style.left = this.pX + this.w * 1 / 10 + 'px'
+      showArtiste.style.top = this.pY - this.h * 7 / 10 + 'px'
     }
   },
   mounted () {

@@ -23,18 +23,27 @@ export default {
         { primary: 'white', secondary: 182 }
       ],
       showCanvaArtist: false,
-      positionMyCanvaCurrently: null
+      positionMyCanvaCurrently: null,
+      controle: true
     }
   },
   methods: {
     click (i) {
       let myCanva = document.getElementById('my_canvas' + i)
       this.positionMyCanvaCurrently = {
-        x: myCanva.style.left,
-        y: myCanva.style.top
+        x: myCanva.style.left.slice(0, myCanva.style.left.length - 2),
+        y: myCanva.style.top.slice(0, myCanva.style.top.length - 2)
       }
-      console.log(this.positionMyCanvaCurrently)
-      this.showCanvaArtist = true
+      console.log(myCanva.style.top.slice(0, myCanva.style.top.length - 2))
+      if (this.controle){
+        this.showCanvaArtist = true
+        this.controle = false
+      } else {
+        this.showCanvaArtist = false
+        setTimeout(()=>{
+          this.showCanvaArtist = true
+        }, 1)
+      }
       this.$emit('show')
     },
     canvas (i) {
