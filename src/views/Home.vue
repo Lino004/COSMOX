@@ -2,7 +2,7 @@
   <div id="home">
     <Canvas @show="showBottomBar = true"></Canvas>
     <TopBar></TopBar>
-    <BottomBar :show="showBottomBar"></BottomBar>
+    <BottomBar :showCurrentArtist="showBottomBar"></BottomBar>
   </div>
 </template>
 
