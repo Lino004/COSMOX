@@ -1,7 +1,7 @@
 <template>
   <div>
-    <canvas @click="test($event, i)" v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
-    <ShowArtiste></ShowArtiste>
+    <canvas @click="click(i)" v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
+    <ShowArtiste :pX="positionMyCanvaCurrently.x" :pY="positionMyCanvaCurrently.y" v-if="showCanvaArtist"></ShowArtiste>
   </div>
 </template>
 
@@ -21,18 +21,31 @@ export default {
         { primary: 'white', secondary: 360 },
         { primary: 'white', secondary: 317 },
         { primary: 'white', secondary: 182 }
-      ]
-    }
-  },
-  computed: {
-    windowSize () {
-      return {
-        x: window.innerWidth,
-        y: window.innerHeight
-      }
+      ],
+      showCanvaArtist: false,
+      positionMyCanvaCurrently: null,
+      controle: true
     }
   },
   methods: {
+    click (i) {
+      let myCanva = document.getElementById('my_canvas' + i)
+      this.positionMyCanvaCurrently = {
+        x: myCanva.style.left.slice(0, myCanva.style.left.length - 2),
+        y: myCanva.style.top.slice(0, myCanva.style.top.length - 2)
+      }
+      console.log(myCanva.style.top.slice(0, myCanva.style.top.length - 2))
+      if (this.controle){
+        this.showCanvaArtist = true
+        this.controle = false
+      } else {
+        this.showCanvaArtist = false
+        setTimeout(()=>{
+          this.showCanvaArtist = true
+        }, 1)
+      }
+      this.$emit('show')
+    },
     canvas (i) {
       let canvas = document.getElementById('my_canvas' + i)
       let context = canvas.getContext('2d')
@@ -82,11 +95,6 @@ export default {
       var max = Math.max(x, y)
       var diameter = Math.round(Math.sqrt(max * max + max * max))
       return diameter / 2
-    },
-    test (i) {
-      let mycanva = document.getElementById('my_canvas' + i)
-      console.log(mycanva.style.left + ' et ' + mycanva.style.top)
-      this.$emit('show')
     },
     posEtoile (i) {
       var w = window.innerWidth

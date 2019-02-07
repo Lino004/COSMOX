@@ -14,6 +14,7 @@ export default {
       h: 30
     }
   },
+  props: ['pX', 'pY'],
   methods: {
     draw () {
       let canva = document.getElementById('my_canva')
@@ -42,10 +43,16 @@ export default {
       } else {
         alert("Canvas n'est pas pris en charge")
       }
+    },
+    position () {
+      let showArtiste = document.getElementById('showArtiste')
+      showArtiste.style.left = this.pX + this.w * 1 / 10 + 'px'
+      showArtiste.style.top = this.pY - this.h * 7 / 10 + 'px'
     }
   },
   mounted () {
     this.draw()
+    this.position()
   }
 }
 </script>
@@ -53,8 +60,6 @@ export default {
 <style scoped>
 #showArtiste {
     position: absolute;
-    top: 50%;
-    left: 50%;
     color: aliceblue
 }
 canvas{

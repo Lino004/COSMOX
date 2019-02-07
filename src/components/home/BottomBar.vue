@@ -1,21 +1,24 @@
 <template>
   <div class="right">
     <transition name="custom-classes-transition" enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-      <div class="current-play" v-if="show">
-        <div class="controls">
-            <div class="prev"><i class="material-icons">skip_previous</i></div>
-            <div class="play"><i class="material-icons">play_arrow</i></div>
-            <div class="next"><i class="material-icons">skip_next</i></div>
-        </div>
-        <div class="slidecontainer" >
-          <div class="bouton"></div>
+      <div id="bottom-bar" v-if="showCurrentArtist">
+        <div class="bouton" @click.prevent="showAlbumArtist()"></div>
+        <div class="current-play">
+          <div class="controls">
+              <div class="prev"><i class="material-icons">skip_previous</i></div>
+              <div class="play"><i class="material-icons">play_arrow</i></div>
+              <div class="next"><i class="material-icons">skip_next</i></div>
+          </div>
+          <div class="slidecontainer">
             <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </div>
+          <div class="volume"><i class="material-icons">volume_up</i></div>
+          <div class="repeat"><i class="material-icons">repeat</i></div>
+          <div class="shuffle"><i class="material-icons">shuffle</i></div>
+          <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
         </div>
-        <div class="volume"><i class="material-icons">volume_up</i></div>
-        <div class="repeat"><i class="material-icons">repeat</i></div>
-        <div class="shuffle"><i class="material-icons">shuffle</i></div>
-        <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
       </div>
+      
     </transition>
   </div>
 </template>
@@ -24,9 +27,23 @@
 export default {
   name: 'bottombar',
   data () {
-    return {}
+    return {
+      controlShowAlbumArtist: false,
+      heightBottomBar: 10
+    }
   },
-  props: ['show']
+  props: ['showCurrentArtist'],
+  methods: {
+    showAlbumArtist() {
+      let bottomBar = document.getElementById('bottom-bar')
+      this.controlShowAlbumArtist = !this.controlShowAlbumArtist
+      if (this.controlShowAlbumArtist){
+        bottomBar.style.height = 70 + '%'
+      }else {
+        bottomBar.style.height = 10 + '%'
+      }
+    },
+  },
 }
 </script>
 
@@ -39,7 +56,7 @@ export default {
 }
 .bouton{
     position: absolute;
-    top: 10%;
+    top: 1%;
     left: 47.5%;
     width: 60px;
     height: 5.5px;
@@ -52,8 +69,18 @@ export default {
     z-index: 3;
     cursor: pointer;
 }
-.right .current-play {
+#bottom-bar {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background-color: rgba(255,255,255,.2);
+}
+.right .current-play {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,7 +89,6 @@ export default {
   height: 70px;
   padding: 10px;
   margin-left: -30px;
-  background-color: rgba(255,255,255,.2);
 
 }
 .right .current-play .info {
