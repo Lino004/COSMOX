@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Loading from './views/Loading.vue'
 import Home from './views/Home.vue'
+import Login from './views/Login.vue'
 import About from './views/About.vue'
 import Test from './views/Test.vue'
 
@@ -24,6 +25,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
       path: '/about',
       name: 'about',
       component: About
@@ -33,5 +39,6 @@ export default new Router({
       name: 'test',
       component: Test
     }
+
   ]
 })

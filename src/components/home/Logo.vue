@@ -1,5 +1,5 @@
 <template>
-    <body>
+
 <div id="logo">
   <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 <h1>
@@ -13,7 +13,6 @@
   </div>
   
 
-</body>
 
 </template>
 

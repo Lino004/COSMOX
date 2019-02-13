@@ -56,15 +56,15 @@ export default {
 }
 .bouton{
     position: absolute;
-    top: 1%;
-    left: 47.5%;
-    width: 60px;
+    top: 10%;
+    left: 45%;
+    width: 50px;
     height: 5.5px;
     -ms-border-radius: 4.5px;
     -o-border-radius: 4.5px;
     -moz-border-radius: 4.5px;
     -webkit-border-radius: 4.5px;
-    border-radius: 4.5px;
+    border-radius: 10px;
     background: rgb(151,150,153);
     z-index: 3;
     cursor: pointer;
@@ -78,6 +78,7 @@ export default {
   width: 100%;
   height: 10%;
   background-color: rgba(255,255,255,.2);
+  z-index: 2;
 }
 .right .current-play {
   position: absolute;
@@ -100,18 +101,7 @@ export default {
   height: 50px;
   border-radius: 5px;
 }
-.right .current-play .song {
-  display: flex;
-  flex-direction: column;
-  padding: 8px;
-}
-.right .current-play .song .name {
-  font-size: 16px;
-  font-weight: bold;
-}
-.right .current-play .song .artist {
-  margin-top: 3px;
-}
+
 .right .current-play .controls {
   display: flex;
   align-items: center;
@@ -124,7 +114,6 @@ export default {
 .right .current-play .controls .prev,
 .right .current-play .controls .next {
   color: grey;
-  margin-top: 10px;
 }
 .right .current-play .controls .play {
   display: flex;
@@ -136,7 +125,6 @@ export default {
   background: transparent;
   border-radius: 50%;
   border: 1px solid grey;
-  margin-top: 10px;
 }
 .play :hover{
   display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="canvas">
     <canvas @click="click(i)" v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
     <ShowArtiste :pX="positionMyCanvaCurrently.x" :pY="positionMyCanvaCurrently.y" v-if="showCanvaArtist"></ShowArtiste>
   </div>
@@ -15,7 +15,7 @@ export default {
   },
   data () {
     return {
-      maxStar: 800,
+      maxStar: 1000,
       color: [
         { primary: 'white', secondary: 217 },
         { primary: 'white', secondary: 360 },
@@ -69,7 +69,7 @@ export default {
       )
       gradient.addColorStop(
         0.25,
-        'hsl(' + this.color[n].secondary + ', 64%, 2%)'
+        'transparent'
       )
       gradient.addColorStop(1, 'transparent')
 
@@ -155,4 +155,8 @@ export default {
 </script>
 
 <style scoped>
+#canvas{
+  background: url('https://firebasestorage.googleapis.com/v0/b/cosmox-87a63.appspot.com/o/Default%2Fimages%2FWhatsApp%20Image%202019-02-09%20at%2014.11.31.jpeg?alt=media&token=ee62deec-8659-4d46-8424-123239fc9885') no-repeat center fixed;
+  background-size: cover;
+}
 </style>

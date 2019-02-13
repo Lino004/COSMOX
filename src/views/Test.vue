@@ -1,60 +1,64 @@
 <template>
-  <div id="test">
-    <canvas id="my_canva" :width="w" :height="h"></canvas>
+
+
+
+  <div class="container">
+  <div class="row">
+    <div class="col-sm-4" style="background-color:yellow;">
+      <p>Lorem ipsum...</p>
+    </div>
+    <div class="row col-sm-4" style="background-color:pink;">
+      <table class="ui very basic table">
+       <thead>
+        <tr>
+         <th>TRACK</th>
+         <th>ARTIST</th>
+         <th>ALBUM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John</td>
+          <td>Approuvé</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Jamie</td>
+          <td>Approuvé</td>
+          <td>Nécessite</td>
+        </tr>
+        <tr>
+          <td>Jill</td>
+          <td>Denied</td>
+          <td>None</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="col-sm-4" style="background-color:green;">
+      <div class="ui segment">
+        <img class="ui tiny left floated image" src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg">
+        <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+        <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+        </div>
+    </div>
   </div>
+</div>
+
 </template>
 
 <script>
 export default {
-  name: 'test',
-  data () {
-    return {
-      w: 200
-    }
-  },
-  computed: {
-    h () {
-      return this.w / 3
-    }
-  },
-  methods: {
-    draw () {
-      let canva = document.getElementById('my_canva')
-      if (canva.getContext) {
-        let ctx = canva.getContext('2d')
 
-        ctx.fillStyle = 'rgba(144, 151, 159, 0.67)'
-        ctx.beginPath()
-        ctx.moveTo(this.w * 1 / 10, this.h * 7 / 10)
-        ctx.lineTo(this.w * 95 / 300, 10)
-        ctx.lineTo(this.w, 10)
-        ctx.lineTo(this.w, 0)
-        ctx.lineTo(this.w * 3 / 10, 0)
-        ctx.lineTo(this.w * 1 / 30, this.h * 7 / 10)
-        ctx.fill()
-
-        ctx.fillStyle = 'rgba(144, 151, 159, 0.67)'
-        ctx.beginPath()
-        ctx.arc(this.w / 10, this.h * 7 / 10, 20, 0, Math.PI * 2, true)
-        ctx.fill()
-
-        ctx.fillStyle = 'rgba(144, 151, 159, 1)'
-        ctx.beginPath()
-        ctx.arc(this.w / 10, this.h * 7 / 10, 15, 0, Math.PI * 2, true)
-        ctx.fill()
-      } else {
-        alert("Canvas n'est pas pris en charge")
-      }
-    }
-  },
-  mounted () {
-    this.draw()
-  }
 }
 </script>
 
-<style scoped>
-canvas{
-  border: 1px solid black;
+<style>
+.container{
+  width: 100%;
+  text-align:center;
+}
+img{
+  border-radius: 15px;
 }
 </style>
