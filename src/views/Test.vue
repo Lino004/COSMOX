@@ -1,60 +1,105 @@
 <template>
-  <div id="test">
-    <canvas id="my_canva" :width="w" :height="h"></canvas>
+<div class="ui search">
+  <div class="ui icon input">
+    <input v-model="focusSearch" class="prompt" type="text" placeholder="Reherche pays...">
+    <i class="search icon"></i>
   </div>
+  <div class="results"></div>
+  <div class="ui segment">
+    {{artisteSelect}}
+  </div>
+</div>
+
 </template>
 
 <script>
+import { storage, db } from '@/firebase.js'
+
 export default {
-  name: 'test',
-  data () {
+  data() {
     return {
-      w: 200
+      focusSearch : '',
+      test: null,
+      allArtistes: [],
+      onArtisteSelect: {}
     }
   },
   computed: {
-    h () {
-      return this.w / 3
-    }
+      artistesDbRef () {
+          return db.ref('artistes')
+      },
+      artisteSelect () {
+        return this.onArtisteSelect
+      }
   },
   methods: {
-    draw () {
-      let canva = document.getElementById('my_canva')
-      if (canva.getContext) {
-        let ctx = canva.getContext('2d')
-
-        ctx.fillStyle = 'rgba(144, 151, 159, 0.67)'
-        ctx.beginPath()
-        ctx.moveTo(this.w * 1 / 10, this.h * 7 / 10)
-        ctx.lineTo(this.w * 95 / 300, 10)
-        ctx.lineTo(this.w, 10)
-        ctx.lineTo(this.w, 0)
-        ctx.lineTo(this.w * 3 / 10, 0)
-        ctx.lineTo(this.w * 1 / 30, this.h * 7 / 10)
-        ctx.fill()
-
-        ctx.fillStyle = 'rgba(144, 151, 159, 0.67)'
-        ctx.beginPath()
-        ctx.arc(this.w / 10, this.h * 7 / 10, 20, 0, Math.PI * 2, true)
-        ctx.fill()
-
-        ctx.fillStyle = 'rgba(144, 151, 159, 1)'
-        ctx.beginPath()
-        ctx.arc(this.w / 10, this.h * 7 / 10, 15, 0, Math.PI * 2, true)
-        ctx.fill()
-      } else {
-        alert("Canvas n'est pas pris en charge")
-      }
+    listenerAllArtistes() {
+      this.artistesDbRef.on('child_added', snap => {
+        this.allArtistes.push({ ...snap.val()
+        })
+      })
+    }
+  },
+  watch: {
+    focusSearch () {
+      var artistes = this.allArtistes
+      $('.ui.search').search({
+        type: "category",
+        searchFields: ["bio", "name"],
+        fullTextSearch: true,
+        onSelect: function onSelect(result, response) {
+          this.onArtisteSelect = response
+        },
+        apiSettings: {
+          responseAsync: function mockResponseAsync(settings, callback) {
+            if (settings.urlData.query) {
+              (function() {
+                var result = {
+                  results: {}
+                }
+                artistes.filter( artiste => {
+                    return artiste.name.toLowerCase().includes(
+                      settings.urlData.query.toLowerCase()
+                    )
+                  }).forEach(function(item) {
+                    result.results["category" + item.id.toString()] = {
+                      name: item.id.toString(),
+                      results: [item]
+                    }
+                  })
+                callback(result)
+              })()
+            } else callback({})
+          },
+          throttle: 400
+        },
+        templates: {
+          message: function message(type, _message) {
+            var html =
+              '<div class="message empty"><div class="header">No users found</div><div class="description">Your search was not successful</div></div>'
+            return html
+          },
+          category: function category(response) {
+            var html = ""
+            Object.keys(response.results).forEach(function(key) {
+              html +=
+                '<div class="category"><a class="result"><div class="content"><div class="title">' +
+                response.results[key].results[0].name +
+                '</div></div></a></div>'
+            })
+            return html
+          }
+        }
+      })
+      console.log(this.onArtisteSelect)
     }
   },
   mounted () {
-    this.draw()
+    this.listenerAllArtistes()
   }
 }
 </script>
 
-<style scoped>
-canvas{
-  border: 1px solid black;
-}
+<style>
+
 </style>

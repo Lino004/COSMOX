@@ -10,7 +10,7 @@
               <div class="next"><i class="material-icons">skip_next</i></div>
           </div>
           <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <input type="range" min="1" max="100" value="10" class="slider" id="myRange">
           </div>
           <div class="volume"><i class="material-icons">volume_up</i></div>
           <div class="repeat"><i class="material-icons">repeat</i></div>
@@ -18,7 +18,6 @@
           <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
         </div>
       </div>
-      
     </transition>
   </div>
 </template>
@@ -34,16 +33,16 @@ export default {
   },
   props: ['showCurrentArtist'],
   methods: {
-    showAlbumArtist() {
+    showAlbumArtist () {
       let bottomBar = document.getElementById('bottom-bar')
       this.controlShowAlbumArtist = !this.controlShowAlbumArtist
-      if (this.controlShowAlbumArtist){
+      if (this.controlShowAlbumArtist) {
         bottomBar.style.height = 70 + '%'
-      }else {
+      } else {
         bottomBar.style.height = 10 + '%'
       }
-    },
-  },
+    }
+  }
 }
 </script>
 
