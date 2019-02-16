@@ -48,8 +48,9 @@
 </template>
 
 <script>
-export default {
+import { storage, db } from '@/firebase.js'
 
+export default {
 }
 </script>
 

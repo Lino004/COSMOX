@@ -31,20 +31,21 @@ export default {
       
     }
   },
+  computed: {},
   methods: {
     click (i) {
+      this.currentStart = i
       let myCanva = document.getElementById('my_canvas' + i)
       this.positionMyCanvaCurrently = {
         x: myCanva.style.left.slice(0, myCanva.style.left.length - 2),
         y: myCanva.style.top.slice(0, myCanva.style.top.length - 2)
       }
-      console.log(myCanva.style.top.slice(0, myCanva.style.top.length - 2))
-      if (this.controle){
+      if (this.controle) {
         this.showCanvaArtist = true
         this.controle = false
       } else {
         this.showCanvaArtist = false
-        setTimeout(()=>{
+        setTimeout(() => {
           this.showCanvaArtist = true
         }, 1)
       }
