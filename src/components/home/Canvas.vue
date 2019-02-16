@@ -1,7 +1,8 @@
 <template>
   <div id="canvas">
-    <canvas @click="click(i)" v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
-    <ShowArtiste :pX="positionMyCanvaCurrently.x" :pY="positionMyCanvaCurrently.y" v-if="showCanvaArtist"></ShowArtiste>
+    <canvas @click="click(i)" @mouseover="over(i)"  v-for="i in maxStar" :key="i" :id="'my_canvas'+i"></canvas>
+     <ShowArtiste :pX="positionMyCanvaCurrently.x" :pY="positionMyCanvaCurrently.y" v-if="showCanvaArtist"></ShowArtiste>
+    <ShowArtiste @click="cliick(i)" :pX="positionMyCanvaCurrently.x" :pY="positionMyCanvaCurrently.y" v-if="show"></ShowArtiste>
   </div>
 </template>
 
@@ -23,8 +24,11 @@ export default {
         { primary: 'white', secondary: 182 }
       ],
       showCanvaArtist: false,
+      show: false,
       positionMyCanvaCurrently: null,
-      controle: true
+      controle: true,
+      controleOver: true
+      
     }
   },
   methods: {
@@ -46,6 +50,25 @@ export default {
       }
       this.$emit('show')
     },
+    over (i) {
+      let myCanva = document.getElementById('my_canvas' + i)
+      this.positionMyCanvaCurrently = {
+        x: myCanva.style.left.slice(0, myCanva.style.left.length - 2),
+        y: myCanva.style.top.slice(0, myCanva.style.top.length - 2)
+      }
+       console.log(myCanva.style.top.slice(0, myCanva.style.top.length - 2))
+      if (this.controleOver){
+        this.show = true
+        this.controleOver= false
+      } else {
+        this.show = false
+        setTimeout(()=>{
+          this.show = true
+        }, 1)
+      }
+      this.$emit('show')
+    },
+
     canvas (i) {
       let canvas = document.getElementById('my_canvas' + i)
       let context = canvas.getContext('2d')
@@ -155,8 +178,5 @@ export default {
 </script>
 
 <style scoped>
-#canvas{
-  background: url('https://firebasestorage.googleapis.com/v0/b/cosmox-87a63.appspot.com/o/Default%2Fimages%2FWhatsApp%20Image%202019-02-09%20at%2014.11.31.jpeg?alt=media&token=ee62deec-8659-4d46-8424-123239fc9885') no-repeat center fixed;
-  background-size: cover;
-}
+
 </style>
