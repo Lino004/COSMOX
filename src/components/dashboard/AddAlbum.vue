@@ -40,14 +40,16 @@
                 </table>
             </div>
         </form>
-contentAlbums
         <div class="ui segment inverted" style="background-color: rgba(255,255,255,.2); color: white" v-if="contentAlbums">
             <h4 class="ui dividing header inverted">Liste des albums de {{artisteSelect.name}}</h4>
-            <div class="ui accordion inverted">
+            <div class="ui accordion inverted" v-if="artisteSelect.albums">
                 <div class="title" @click="showAlbum()"><i class="dropdown icon"></i> Qu'est-ce qu'un chien ? </div>
                 <div class="content">
                     <p class="transition hidden">Un chien est un genre d'animal domestique. Ses principales caractéristiques étant sa loyauté et sa fidélité, il est le bienvenu dans de nombreux foyers autour du monde.</p>
                 </div>
+            </div>
+            <div class="ui center aligned container" style="background-color: transparent; color: white" v-else>
+                <p>Cette artiste n'a aucun album dans la base</p>
             </div>
         </div>
 
