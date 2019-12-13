@@ -19,7 +19,6 @@
                 <div class="shuffle"><i class="material-icons">shuffle</i></div>
                 <div class="info"><img src="https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg"/></div>
             </div>
-            
         </div>
     </div>
 </template>

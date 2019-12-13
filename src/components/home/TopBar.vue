@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'topbar'
+  name: 'topbar'
 }
 </script>
 

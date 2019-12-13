@@ -27,7 +27,7 @@ export default {
     return {}
   },
   methods: {
-    go() {
+    go () {
       $('.ui.modal').modal('show')
     }
   }
