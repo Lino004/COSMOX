@@ -7,36 +7,36 @@
             <div class="required field" :class="{'error': errorName}">
                 <label style="color: white">Nom de l'artiste</label>
                 <input v-model="infoArtiste.nom" type="text" name="nom-artiste" placeholder="Nom de l'artiste" style="background-color: rgba(255,255,255,.2); color: white">
+            </div>
+            <div class="required field" :class="{'error': errorImg}">
+                <label style="color: white">Image de l'artiste </label>
+                <label for="fileImgArtiste" class="ui icon blue button field" style="background-color: rgba(255,255,255,.2); color: white">
+                    <i class="image icon large"></i>
+                </label>
+                <input @change.prevent="getFileImg($event)" type="file" id="fileImgArtiste" accept="image/*" style="display:none">
+            </div>
+                <div class="centered field" v-if="infoArtiste.srcImg.length > 0">
+                    <label style="color: white">Visualisation</label>
+                    <img class="ui tiny image" :src="infoArtiste.srcImg">
                 </div>
-                <div class="required field" :class="{'error': errorImg}">
-                    <label style="color: white">Image de l'artiste </label>
-                    <label for="fileImgArtiste" class="ui icon blue button field" style="background-color: rgba(255,255,255,.2); color: white">
-                        <i class="image icon large"></i>
-                    </label>
-                    <input @change.prevent="getFileImg($event)" type="file" id="fileImgArtiste" accept="image/*" style="display:none">
+        </div>
+        <div class="required field" :class="{'error': errorBio}">
+            <label style="color: white">Petite biographie</label>
+            <textarea v-model="infoArtiste.bio" placeholder="Biographie ..." rows="2" style="background-color: rgba(255,255,255,.2); color: white"></textarea>
+        </div>
+        <div class="ui grid">
+            <div class="three wide column">
+                <div class="ui blue button" @click.prevent="send()" style="background-color: rgba(255,255,255,.2); color: white">Enregistrer</div>
+            </div>
+            <div class="seven wide column" v-if="notif.show">
+                <div class="ui mini floating icon message" :class="notif.type" style="margin: -10px;">
+                    <i class="icon" :class="notif.icon"></i>
+                    <div class="content">
+                        <p><b>{{notif.msg}}</b></p>
+                    </div>
                 </div>
-                    <div class="centered field" v-if="infoArtiste.srcImg.length > 0">
-                        <label style="color: white">Visualisation</label>
-                        <img class="ui tiny image" :src="infoArtiste.srcImg">
-                </div>
-                    </div>
-                    <div class="required field" :class="{'error': errorBio}">
-                        <label style="color: white">Petite biographie</label>
-                        <textarea v-model="infoArtiste.bio" placeholder="Biographie ..." rows="2" style="background-color: rgba(255,255,255,.2); color: white"></textarea>
-                    </div>
-                    <div class="ui grid">
-                        <div class="three wide column">
-                            <div class="ui blue button" @click.prevent="send()" style="background-color: rgba(255,255,255,.2); color: white">Enregistrer</div>
-                        </div>
-                        <div class="seven wide column" v-if="notif.show">
-                            <div class="ui mini floating icon message" :class="notif.type" style="margin: -10px;">
-                                <i class="icon" :class="notif.icon"></i>
-                                <div class="content">
-                                    <p><b>{{notif.msg}}</b></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
     </form>
     <div class="ui segment inverted" style="background-color: rgba(255,255,255,.2); color: white">
         <h4 class="ui dividing header">Liste des artistes actuel</h4>
@@ -103,11 +103,11 @@ export default {
                 msg: msg
             }
         },
-        getFileImg(event) {
+        getFileImg (event) {
             this.infoArtiste.fileImg = event.target.files[0]
             this.infoArtiste.srcImg = URL.createObjectURL(this.infoArtiste.fileImg)
         },
-        sendArtiste() {
+        sendArtiste () {
             let dataArtiste = {
                 name: this.infoArtiste.nom,
                 bio: this.infoArtiste.bio,
@@ -115,7 +115,7 @@ export default {
                 id: this.allArtistes.length
             }
             db.ref('artistes/' + this.allArtistes.length + '/').set(dataArtiste)
-            this.notification(true, 'positive', 'check', "Enregistrement réussi")
+            this.notification(true, 'positive', 'check', 'Enregistrement réussi')
             this.infoArtiste = {
                 nom: '',
                 bio: '',
@@ -124,53 +124,53 @@ export default {
             }
             this.notification(false)
         },
-        send() {
+        send () {
             if (this.nameIsValide() && this.bioIsValide() && this.imgIsValide()) {
                 this.sendImg(this.infoArtiste.fileImg)
             }
         },
-        sendImg(file) {
+        sendImg (file) {
             let storageRef = storage.ref('artistes/')
             this.uploadTask = storageRef.child(this.infoArtiste.nom + '/').put(file)
         },
-        nameIsValide() {
+        nameIsValide () {
             if (this.infoArtiste.nom) {
                 this.errorName = false
                 return true
             } else {
                 this.errorName = true
-                this.notification(true, 'negative', 'times', "Le nom de l'artiste n'est pas valide")
+                this.notification(true, 'negative', 'times', 'Le nom de l\'artiste n\'est pas valide')
                 return false
             }
         },
-        bioIsValide() {
+        bioIsValide () {
             if (this.infoArtiste.bio) {
                 console.log('yes')
                 this.errorBio = false
                 return true
             } else {
                 this.errorBio = true
-                this.notification(true, 'negative', 'times', "Veillez insérer une bibliographie")
+                this.notification(true, 'negative', 'times', 'Veillez insérer une bibliographie')
                 return false
             }
         },
-        imgIsValide() {
+        imgIsValide () {
             if (this.infoArtiste.fileImg) {
                 this.errorImg = false
                 return true
             } else {
                 this.errorImg = true
-                this.notification(true, 'negative', 'times', "Vous n'avez pas choisie l'image de l'artiste")
+                this.notification(true, 'negative', 'times', 'Vous n\'avez pas choisie l\'image de l\'artiste')
                 return false
             }
         },
-        listenerAllArtistes() {
+        listenerAllArtistes () {
             this.artistesDbRef.on('child_added', snap => {
                 this.allArtistes.push({ ...snap.val()
                 })
             })
         },
-        listenerSuppArtiste() {
+        listenerSuppArtiste () {
             this.artistesDbRef.on('child_removed', snap => {
                 const deleteArtiste = this.allArtistes.find(art => art.name === snap.name)
                 const index = this.allArtistes.indexOf(deleteArtiste)
@@ -179,7 +179,7 @@ export default {
         }
     },
     watch: {
-        uploadTask() {
+        uploadTask () {
             this.uploadTask.on('state_changed', snapshot => {
                     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                     console.log('progress is ' + progress + '% done')
@@ -197,7 +197,7 @@ export default {
                 })
         }
     },
-    created() {
+    created () {
         this.listenerAllArtistes()
         this.listenerSuppArtiste()
     }

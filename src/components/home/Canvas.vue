@@ -28,7 +28,6 @@ export default {
       positionMyCanvaCurrently: null,
       controle: true,
       controleOver: true
-      
     }
   },
   computed: {},
@@ -57,13 +56,13 @@ export default {
         x: myCanva.style.left.slice(0, myCanva.style.left.length - 2),
         y: myCanva.style.top.slice(0, myCanva.style.top.length - 2)
       }
-       console.log(myCanva.style.top.slice(0, myCanva.style.top.length - 2))
-      if (this.controleOver){
+      console.log(myCanva.style.top.slice(0, myCanva.style.top.length - 2))
+      if (this.controleOver) {
         this.show = true
-        this.controleOver= false
+        this.controleOver = false
       } else {
         this.show = false
-        setTimeout(()=>{
+        setTimeout(() => {
           this.show = true
         }, 1)
       }
@@ -130,7 +129,7 @@ export default {
       var x = 0
       var y = 0
       var dir = 1
-      var vitesse = this.random(r) / 500000
+      var vitesse = this.random(r) / 50000
       var opct = this.random(2, 10) / 10
       var j = 1
       var v = this.random(1, 2500) / 50000
